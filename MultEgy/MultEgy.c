@@ -13,7 +13,7 @@ int main(void){
 			x/=2;
 			y*=2;
 		} else {
-			printf("%d x %d + %d", x-1, y, y);
+			printf("%d x %d + %d", x-1, y, s+y);
 			x -= 1;
 			s += y;
 		}
