@@ -7,19 +7,22 @@ double ab(double n){
 }
 int main(void){
 	int n;
-	printf("Entrer un nombre n: ");
+	printf("Entrer un nombre: ");
 	scanf("%d", &n);
-	const double EPSILON = 0.01;
-	double d = 0;
-	double f = (double) n;
-	double m = (d+f)/2;
-	while(m*m<n-EPSILON || m*m>n-EPSILON){
-		if (m*m>n)
-			f = m;
-		else
+	double g = 0.0;
+	double d = (double) n;
+	const double EPSILON = 0.001;
+	double m = (g+d)/2;
+	int i = 0;
+	while(ab(m*m - n) > EPSILON && i<1000){
+		m = (g+d)/2;
+		if(m*m > n){
 			d = m;
-		m = (d+f)/2;
+		} else {
+			g = m;
+		}
+		i++;
 	}
-	printf("%g", m);
+	printf("La racine de %d est: %g", n, m);
 	return 0;
 }
