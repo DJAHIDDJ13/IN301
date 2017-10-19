@@ -67,8 +67,9 @@ _Bool estTri(Liste *l){
 	}
 	return 1;
 }
+
 int main(void){
-	srand ( time(NULL) );
+	srand (time(NULL));
 	Liste *l = creerListeVide();
 	for(int i=0; i<2; i++)
 		l = pushLast(l,alea(5));
