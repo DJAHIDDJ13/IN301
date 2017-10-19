@@ -16,6 +16,7 @@ void initAlea(Tableau *T){
 	}
 }
 void affTab(Tableau T){
+	printf("TAB: ");
 	for(int i=0; i<T.taille; i++)
 		printf("%d ", T.tab[i]);
 	printf("\n");
@@ -49,24 +50,21 @@ void triTab(Tableau *T){
 			}
 }
 void inserTab(Tableau *T, int t){
-	int j = -1;
-	for(int i=0; i<T->taille; i++)
-		if(t > T->tab[i]){
-			j = i;
+	for(int i=0; i<T->taille; i++){
+		if(t <= T->tab[i]){
+			for(int j=T->taille-1; j>=i; j--)
+				T->tab[j+1] = T->tab[j];
+			T->taille ++;
+			T->tab[i] = t;
 			break;
 		}
-	j = 4;
-	T->taille ++;
-	for(int i=T->taille; i>j; i--)
-		T->tab[i+1] = T->tab[i];
-	T->tab[j+1] = t;
+	}
 }
 void invTab(Tableau *T){
 	for(int i=0; i<(int)(T->taille/2); i++){
 		int a = T->tab[i];
 		T->tab[i] = T->tab[((int)T->taille) - i - 1];
 		T->tab[((int)T->taille) - i - 1]= a;
-		//printf("\nDEBUG: La taille est %d; i = %d; j = %d\n",T->taille, i, ((int)T->taille) - i - 1);
 	}
 }
 void supEle(Tableau *T, int a){
@@ -78,17 +76,17 @@ void supAlea(Tableau *T){
 	int a = alea(T->taille);
 	supEle(T,a);
 }
-/*void supDou(Tableau *T){
-	int k = 0;
+void supDou(Tableau *T){
 	for(int i=T->taille-1; i>=0; i--){
 		for(int j=i-1; j>=0; j--){
 			if(T->tab[i] == T->tab[j]){
 				supEle(T, j);
-				k++;
 			}
 		}
 	}
-	T->taille -= k;
+}
+/*int min(Tableau T){
+	
 }*/
 int main(void){
 	printf("sizeof(Tableau) = %lu\n\n", sizeof(Tableau));
@@ -106,33 +104,40 @@ int main(void){
 	
 	printf("Le minimum du Tableau T est: %d\n", minTab(T));
 	
+	printf("\nLe fonction shift:\n");
 	shift(&T);
 	affTab(T);
 	printf("\n");
-	
+
+	printf("\nLe fonction tri:\n");	
 	triTab(&T);
 	affTab(T);
 	
 	int t;
-	printf("Entrer un nombre pour l'inserer dans le tableau T: ");
+	printf("\nEntrer un nombre pour l'inserer dans le tableau T: ");
 	scanf("%d", &t);
 	inserTab(&T,t);
 	affTab(T);
 	printf("\n");
 	
+	printf("\nL'inverse du tableau:\n");
 	invTab(&T);
 	affTab(T);
 	printf("\n");
 	invTab(&T);
 	
-	supAlea(&T);
+	printf("\nsupression d'un element alaetoire:\n");
 	affTab(T);
 	supAlea(&T);
 	affTab(T);
 	printf("\n");
 	
-	/*supDou(&T);
+	printf("\nsupression des doublons:\n");
+	supDou(&T);
 	affTab(T);
-	printf("\n");*/
+	printf("\n");
+	
+	// LES ALGOS DES TRIS
+	
 	return 0;
 }
