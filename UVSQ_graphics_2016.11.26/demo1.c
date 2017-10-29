@@ -1,9 +1,8 @@
 #include <uvsqgraphics.h>
-
 // ############################
 // Démo 1 de l'API uvsqgraphics
-// Dans geany, cliquer sur <.> pour compiler
-// et sur la coche à droite de <.> pour exécuter
+// Dans geany, cliquer sur <.> ou la roue dentée pour compiler
+// et sur la coche à droite pour exécuter
 // ############################
 
 
@@ -41,7 +40,7 @@ int main () {
     P2 = wait_clic();
     draw_fill_circle(P2,80,rouge);
 
-// Attente de l'appui sur la touche Echap pour terminer
+// Attend de taper la touche 'Esc' ou 'Echap.' pour terminer
     wait_escape();
     exit(0);
 }
