@@ -271,15 +271,27 @@ int valI(Liste *l, int f){
 }
 Liste *triABulle(Liste *l){
 	int nbr = nbrEle(l);
-	_Bool f = 0;
-	do{
-		_Bool f = 0;
-		for(int i=0; i<nbr; i++){
-			if(valI(l,i-1) > valI(l, i)){
-				l = swap(l, i-1, i);
-				f = 1;
-			}
+	Liste* limit = l;
+	Liste* start = l;
+	for(int i=0; i<nbr-1; i++){
+		for(int j=nbr-2; j>0; j--){
+			limit = limit->suiv;
 		}
-	}while(!f);
+		while(l != limit){
+			if(l->suiv->val < l->val){
+				int temp = l->suiv->val;
+				l->suiv->val = l->val;
+				l->val = temp;
+			}
+			l = l->suiv;
+		}
+		l = start;
+	}
 	return l;
 }
+
+
+
+
+
+
