@@ -1,3 +1,9 @@
+main: main.o graphics.o
+	gcc -Wall `sdl-config --libs` -lSDL_ttf main.o graphics.o -o main
+	s
+main.o: main.c
+	gcc -Wall `sdl-config --cflags` -c main.c
+	
 #construit le fichier binaire graphics.o
 graphics.o: graphics.c graphics.h
 	rm -f police.h
