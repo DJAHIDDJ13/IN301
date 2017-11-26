@@ -1,46 +1,32 @@
 #include <uvsqgraphics.h>
-// ############################
-// Démo 1 de l'API uvsqgraphics
-// Dans geany, cliquer sur <.> ou la roue dentée pour compiler
-// et sur la coche à droite pour exécuter
-// ############################
-
 
 int main () {
-    POINT P1, P2;
     init_graphics (800,600);
-    char *a_ecrire = "Cliquer dans la fen"ecirc"tre";
+	affiche_auto_off();
+	POINT p = {400,300};
+	double res = 0;
+	while(1){
+		char c[100];
+		sprintf(c,"%d", get_key());
+		if(atoi(c) == 273)
+			res *=32;
+		else if(atoi(c) == 274)
+			res --;
+		else if(atoi(c) == 275)
+			res = log(-1);
+		else if(atoi(c) == 276)
+			res *= -1;
 
-// Affichage d'un disque et d'un cercle
-    P1.x = 200; P1.y = 300;
-    draw_fill_circle(P1,50,gold);
-    draw_circle(P1,40,silver);
+		if(atoi(c) != -1 && c[0] != 27){
+			char s[100];
+			sprintf(s, "%g",res);
+			fill_screen(blanc);
+			aff_pol_centre(s, 25, p, noir);
+			affiche_all();
+		}
+		else if(atoi(c) == 27)
+			exit(0);
+	} 
 
-// Affichage d'un rectangle avec un bord blanc
-    P2.x = 100; P2.y = 100;
-    draw_fill_rectangle(P1,P2,rouge);
-    draw_rectangle(P1,P2,blanc);
-
-// Affichage de texte de taille 20
-    P1.x = LARGEUR_FENETRE/2 - largeur_texte(a_ecrire,20)/2; 
-    P1.y = 2*hauteur_texte(a_ecrire,20);
-    aff_pol(a_ecrire,20,P1,gris);
-
-// Attente d'un clic
-    P2 = wait_clic();
-// Remplissage de l'écran en blanc
-    fill_screen(blanc);
-// Affichage d'un cercle bleu centré sur le point cliqué
-    P1.x = LARGEUR_FENETRE/2 - largeur_texte(a_ecrire,20)/2; 
-    aff_pol(a_ecrire,20,P1,gris);
-    P2 = wait_clic();
-    draw_fill_circle(P2,80,bleu);
-
-// Affichage d'un cercle rouge centré sur le point cliqué
-    P2 = wait_clic();
-    draw_fill_circle(P2,80,rouge);
-
-// Attend de taper la touche 'Esc' ou 'Echap.' pour terminer
-    wait_escape();
     exit(0);
 }
